@@ -1,5 +1,7 @@
-python-dotenv
-google-genai
+python-dotenv==1.1.0
+google-genai==1.74.0
+instructor==1.15.1
+pydantic==2.10.3
 ruff==0.15.2
 black==24.10.0
 pytest==8.3.4
