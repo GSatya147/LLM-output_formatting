@@ -1,0 +1,5 @@
+python-dotenv
+google-genai
+ruff==0.15.2
+black==24.10.0
+pytest==8.3.4
