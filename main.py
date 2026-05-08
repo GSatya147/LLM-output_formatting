@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 import instructor
+
 # from google import genai
 from google.genai import errors
 from pydantic import BaseModel
@@ -10,6 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 PROMPT = "Extract details from the job descriptions"
+
 
 class JobPost(BaseModel):
     title: str
@@ -25,6 +27,7 @@ class JobPost(BaseModel):
 
 class JobPostings(BaseModel):
     postings: list[JobPost]
+
 
 post_list: list = [
     """
@@ -124,14 +127,14 @@ post_list: list = [
     Balance technical leadership with operational excellence; lead workload and opportunity review meetings and provide insight into how to achieve a technical agreement and migration strategy, working directly with our customers, partners, and prospects.
     Work cross-functionally across Google, partners, and team to resolve technical roadblocks.
                 
-    """
+    """,
 ]
 
 message_str: str = ""
 
 for i, j in enumerate(post_list):
-    message_str+=(f"\n{i+1}. {j}")
-    
+    message_str += f"\n{i+1}. {j}"
+
 
 client = instructor.from_provider("google/gemini-3-flash-preview")
 
@@ -141,7 +144,7 @@ try:
         messages=[
             {
                 "role": "user",
-                "content": f"{PROMPT} + {message_str}",
+                "content": PROMPT + message_str,
             }
         ],
         max_retries=3,
@@ -152,12 +155,10 @@ try:
 
 except errors.ClientError as e:
     if e.code == 429:
-        print(f"Rate limited..")
+        print("Rate limited..")
 
 except errors.ServerError as e:
     print(f"Error: {e}")
 
 except Exception as e:
     print(f"Unexpected error: {e}")
-
-
