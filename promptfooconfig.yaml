@@ -1,0 +1,32 @@
+description: "My eval"
+
+prompts:
+  - pass
+
+providers:
+  - file://C:/Users/gvvsn/OneDrive/Desktop/Learning/LLM-ouput-formating/provider.py
+  
+
+tests:
+  - vars:
+      topic: title
+    assert:
+      - type: icontains
+        value: Senior Technical Program Manager, Network Infrastructure and Capacity Planning
+
+  - vars:
+      topic: company_name
+
+    assert: 
+      - type: icontains
+        value: Google
+
+  - vars:
+      topic: salary
+
+    assert: 
+      - type: icontains
+        value: $192,000-$278,000
+
+
+ 

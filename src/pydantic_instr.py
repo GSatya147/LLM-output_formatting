@@ -49,7 +49,8 @@ class JobPostings(BaseModel):
     postings: list[JobPost]
 
 
-post_list: list = [
+def extractor():
+    post_list: list = [
     """
     Senior Technical Program Manager, Network Infrastructure and Capacity Planning
     Minimum qualifications:
@@ -148,37 +149,45 @@ post_list: list = [
     Work cross-functionally across Google, partners, and team to resolve technical roadblocks.
                 
     """,
-]
+    ]
 
-message_str: str = ""
+    postings_string: str = ""
 
-for i, j in enumerate(post_list):
-    message_str += f"\n{i+1}. {j}"
+    message_str: str = ""
+
+    for i, j in enumerate(post_list):
+        message_str += f"\n{i+1}. {j}"
 
 
-client = instructor.from_provider("google/gemini-3-flash-preview")
+    client = instructor.from_provider("google/gemini-3-flash-preview")
 
-try:
-    Job_posting = client.create(
-        response_model=JobPostings,
-        messages=[
-            {
-                "role": "user",
-                "content": PROMPT + message_str,
-            }
-        ],
-        max_retries=3,
-    )
+    try:
+        Job_posting = client.create(
+            response_model=JobPostings,
+            messages=[
+                {
+                    "role": "user",
+                    "content": PROMPT + message_str,
+                }
+            ],
+            max_retries=3,
+        )
 
-    for i, j in enumerate(Job_posting.postings):
-        print(f"\n{i+1}.\n{j}")
+        for i, j in enumerate(Job_posting.postings):
+            print(f"\n{i+1}.\n{j}")
+            # postings_string += f"\n{i+1}.\n{j}"
 
-except errors.ClientError as e:
-    if e.code == 429:
-        print("Rate limited..")
+        print(Job_posting.model_dump_json())
+        return Job_posting.model_dump_json()
+    
+    except errors.ClientError as e:
+        if e.code == 429:
+            print("Rate limited..")
 
-except errors.ServerError as e:
-    print(f"Error: {e}")
+    except errors.ServerError as e:
+        print(f"Error: {e}")
 
-except Exception as e:
-    print(f"Unexpected error: {e}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+extractor()
