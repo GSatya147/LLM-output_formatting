@@ -1,7 +1,7 @@
 description: "My eval"
 
 prompts:
-  - "{{job_posting}}"
+  - "pass"
 
 providers:
   - file://C:/Users/gvvsn/OneDrive/Desktop/Learning/LLM-ouput-formating/provider.py
