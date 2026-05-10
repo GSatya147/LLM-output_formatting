@@ -32,6 +32,7 @@ load_dotenv()
 
 PROMPT = "Extract details from the job descriptions"
 
+
 class JobPost(BaseModel):
     title: str
     company_name: str
@@ -46,6 +47,7 @@ class JobPost(BaseModel):
 
 class JobPostings(BaseModel):
     postings: list[JobPost]
+
 
 def extractor(postlist: str):
 
@@ -64,7 +66,7 @@ def extractor(postlist: str):
         )
 
         return Job_posting.model_dump_json()
-    
+
     except errors.ClientError as e:
         if e.code == 429:
             print("Rate limited..")
@@ -77,4 +79,3 @@ def extractor(postlist: str):
     except Exception as e:
         print(f"Unexpected error: {e}")
         raise
-

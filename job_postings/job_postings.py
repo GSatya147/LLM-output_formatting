@@ -96,5 +96,5 @@ POST_LIST: list = [
     Balance technical leadership with operational excellence; lead workload and opportunity review meetings and provide insight into how to achieve a technical agreement and migration strategy, working directly with our customers, partners, and prospects.
     Work cross-functionally across Google, partners, and team to resolve technical roadblocks.
                 
-    """
-    ]
+    """,
+]
