@@ -1,32 +1,42 @@
 description: "My eval"
 
 prompts:
-  - pass
+  - "{{job_posting}}"
 
 providers:
   - file://C:/Users/gvvsn/OneDrive/Desktop/Learning/LLM-ouput-formating/provider.py
   
-
 tests:
   - vars:
-      topic: title
+      job_index: 0
+
     assert:
       - type: icontains
-        value: Senior Technical Program Manager, Network Infrastructure and Capacity Planning
-
-  - vars:
-      topic: company_name
-
-    assert: 
+        value: Senior Technical Program Manager
       - type: icontains
         value: Google
+      - type: icontains
+        value: $192,000 - $278,000
 
   - vars:
-      topic: salary
+      job_index: 1
 
-    assert: 
+    assert:
       - type: icontains
-        value: $192,000-$278,000
+        value: Senior Technical Program Manager
+      - type: icontains
+        value: Google
+      - type: icontains
+        value: $192,000 - $278,000
 
+  - vars:
+      job_index: 2
 
- 
+    assert:
+      - type: icontains
+        value: Senior Technical Program Manager
+      - type: icontains
+        value: Google
+      - type: icontains
+        value: $192,000 - $278,000
+    
