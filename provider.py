@@ -9,6 +9,6 @@ def call_api(prompt, options, context) -> dict:
         model_json = extractor(job_text)
         return {"output": model_json}
     except Exception as e:
-        with open("debug.log", "a") as f:
-            f.write(f"index={context['vars']['job_index']} error={str(e)}\n")
+        # with open("debug.log", "a") as f:
+        #     f.write(f"index={context['vars']['job_index']} error={str(e)}\n")
         return {"output": None, "error": str(e)}
